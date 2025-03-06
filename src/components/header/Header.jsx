@@ -7,7 +7,7 @@ import { CiLogout, CiUser } from "react-icons/ci";
 import { AuthContext } from "../../auth/AuthContext";
 import Logo from "./Logo";
 import Modal from "../shared/Modal/Modal";
-import Login from "../login/login";
+import Login from "../login/Login";
 
 // Styles
 import "../../styles/header/header.css";
