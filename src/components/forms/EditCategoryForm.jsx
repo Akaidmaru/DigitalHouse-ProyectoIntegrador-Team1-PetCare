@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../../styles/forms/formStyles.css";
 
-const AddCategoryForm = ({ onClose, onSubmit }) => {
+const EditCategoryForm = ({ category, onClose, onSubmit }) => {
 	const [formData, setFormData] = useState({
+		idCategoria: "",
 		nombre: "",
 	});
+
+	useEffect(() => {
+		if (category) {
+			setFormData({
+				idCategoria: category.idCategoria,
+				nombre: category.nombre,
+			});
+		}
+	}, [category]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -15,7 +25,7 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 	return (
 		<div className="form-overlay">
 			<div className="form-container">
-				<h2>Agregar Nueva Categoría</h2>
+				<h2>Editar Categoría</h2>
 				<form onSubmit={handleSubmit}>
 					<div className="form-group">
 						<label>Nombre:</label>
@@ -32,7 +42,7 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 						/>
 					</div>
 					<div className="form-buttons">
-						<button type="submit">Guardar</button>
+						<button type="submit">Actualizar</button>
 						<button type="button" onClick={onClose}>
 							Cancelar
 						</button>
@@ -42,10 +52,13 @@ const AddCategoryForm = ({ onClose, onSubmit }) => {
 		</div>
 	);
 };
-AddCategoryForm.propTypes = {
+EditCategoryForm.propTypes = {
+	category: PropTypes.shape({
+		idCategoria: PropTypes.number.isRequired,
+		nombre: PropTypes.string.isRequired,
+	}),
 	onClose: PropTypes.func.isRequired,
 	onSubmit: PropTypes.func.isRequired,
 };
 
-export default AddCategoryForm;
-
+export default EditCategoryForm;

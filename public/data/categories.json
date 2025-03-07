@@ -1,18 +1,18 @@
 [
     {
         "name": "Cuidado en casa",
-        "icon": "/public/icons/House.svg"
+        "icon": "/icons/House.svg"
     },
     {
         "name": "Paseos",
-        "icon": "/public/icons/Dog.svg"
+        "icon": "/icons/Dog.svg"
     },
     {
         "name": "Spa a domicilio",
-        "icon": "/public/icons/Grooming.svg"
+        "icon": "/icons/Grooming.svg"
     },
     {
         "name": "Asesorías",
-        "icon": "/public/icons/Pets.svg"
+        "icon": "/icons/Pets.svg"
     }
 ]

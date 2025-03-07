@@ -16,13 +16,15 @@ import "../../styles/admin/adminService.css";
 import warningIcon from "../../images/warning.png";
 import addPlusIcon from "../../images/add-plus.png";
 
+// eslint-disable-next-line react/prop-types
 const AdminService = ({ isInAdminLayout }) => {
 	const [showAddForm, setShowAddForm] = useState(false);
 	const [error, setError] = useState(null);
-	const [productos, setProductos] = useState([]);
+	// eslint-disable-next-line no-empty-pattern
+	const [] = useState([]);
 	const { auth, logout } = useContext(AuthContext);
-	const [loading, setLoading] = useState(false);
-	const [services, setServices] = useState([]);
+	const [, setLoading] = useState(false);
+	const [, setServices] = useState([]);
 	const [selectedService, setSelectedService] = useState(null);
 	const [showEditForm, setShowEditForm] = useState(false);
 
@@ -62,7 +64,7 @@ const AdminService = ({ isInAdminLayout }) => {
 		fetchServices();
 	}, [auth.token]);
 
-	const handleAddProduct = async (servicioData) => {
+	const handleAddProduct = async () => {
 		const headers = getAuthHeaders();
 		if (!headers) {
 			logout();
@@ -70,11 +72,6 @@ const AdminService = ({ isInAdminLayout }) => {
 		}
 
 		try {
-			const response = await axios.post(
-				"http://localhost:8080/api/servicios",
-				servicioData,
-				headers
-			);
 
 			// Actualizar la lista de servicios
 			await fetchServices();

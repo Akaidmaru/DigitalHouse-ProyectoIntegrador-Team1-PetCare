@@ -126,17 +126,39 @@
 
 /* Ajustamos los anchos de las columnas de la tabla */
 .admin-table th:nth-child(1) {
-  width: 10%; /* ID */
+  width: 10%;
+  /* ID */
 }
 
 .admin-table th:nth-child(2) {
-  width: 35%; /* Nombre */
+  width: 35%;
+  /* Nombre */
 }
 
 .admin-table th:nth-child(3) {
-  width: 35%; /* Categoría */
+  width: 35%;
+  /* Categoría */
 }
 
 .admin-table th:nth-child(4) {
-  width: 20%; /* Acciones */
+  width: 20%;
+  /* Acciones */
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin: 0 5px;
+  color: #666;
+  transition: color 0.3s;
+}
+
+.icon-button:hover {
+  color: #007bff;
+}
+
+.icon-button.delete:hover {
+  color: #dc3545;
 }

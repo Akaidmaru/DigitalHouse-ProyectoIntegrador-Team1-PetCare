@@ -53,6 +53,7 @@ const AdminServiceList = ({ onEdit }) => {
 			);
 
 			console.log("Servicios desde la base de datos:");
+			console.log(response.data);
 			console.log(response.data.listaServicios);
 			setServices(response.data.listaServicios);
 			setError(null);
