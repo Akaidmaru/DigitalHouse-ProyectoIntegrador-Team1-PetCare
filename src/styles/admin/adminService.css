@@ -16,7 +16,7 @@
 .admin-content {
   display: flex;
   flex-direction: column;
-  padding: 0 20px 0 8px;
+  padding: 0 20px;
 }
 
 .admin-section {
@@ -32,7 +32,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .adminService-admin-button {
@@ -42,7 +42,7 @@
   color: var(--button-third-font-color);
   background-color: var(--button-third-background-color);
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
   -webkit-border-radius: var(--button-third-border-radius);

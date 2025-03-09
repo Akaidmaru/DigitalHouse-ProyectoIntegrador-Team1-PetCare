@@ -1,3 +1,4 @@
+import React from "react";
 import { PiWhatsappLogo } from "react-icons/pi";
 import { IoLocationOutline } from "react-icons/io5";
 import { HiOutlineMail } from "react-icons/hi";
@@ -40,25 +41,25 @@ const Footer = () => {
           {/* Versión Mobile */}
           <div className="mobile-only">
             <div className="mobile-info">
-              <p className="info-item">
+              <div className="mobile-section">
+                <h4>HABLEMOS</h4>
+                <div className="mobile-icons">
+                  <HiOutlineMail className="info-icon" />
+                  <PiWhatsappLogo className="info-icon" />
+                </div>
+              </div>
+              <div className="mobile-section">
+                <h4>ENCUÉNTRANOS</h4>
                 <IoLocationOutline className="info-icon" />
-                Calle Digital House #10
-              </p>
-              <p className="info-item">
-                <PiWhatsappLogo className="info-icon" />
-                57+ 111222333
-              </p>
-              <p className="info-item">
-                <HiOutlineMail className="info-icon email-icon" />
-                info@outstanding11.com
-              </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="footer-copyright">
+        <div className="copyright-wrapper">
           <div className="copyright-text">
-            <FaRegCopyright style={{ fontSize: "14px", marginRight: "15px" }} />{" "}
+            <FaRegCopyright style={{ fontSize: "14px", marginRight: "15px" }} />
             2025 Todos los derechos reservados Pet Care
           </div>
           <div className="social-icons">
@@ -66,6 +67,7 @@ const Footer = () => {
             <FaFacebook style={{ color: 'white', fontSize: '16px' }} />
             <FaInstagram style={{ color: 'white', fontSize: '16px' }} />
           </div>
+        </div>
       </div>
     </footer>
   );

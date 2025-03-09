@@ -80,7 +80,7 @@
 body {
 	margin: 0;
 	padding: 0;
-	background-color: #fffeff;
+	min-height: 100vh;
 	font-family: var(--paragraph-font);
 	color: var(--paragraph-font-color);
 }
@@ -171,3 +171,60 @@ button:focus-visible {
   }
 }
  */
+
+/* Estructura base */
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#root {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Contenedor principal */
+main {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+	padding-bottom: 40px; /* Espacio para el footer */
+}
+
+.mainContainer {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+/* Contenedores específicos */
+.admin-container,
+.home-container,
+.service-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 40px; /* Espacio antes del footer */
+}
+
+/* Footer */
+footer {
+	width: 100%;
+	background-color: var(--footer-background-color);
+	margin-top: auto;
+}
+
+@media (max-width: 768px) {
+	main {
+		padding-bottom: 60px;
+	}
+
+	.admin-container,
+	.home-container,
+	.service-container {
+		margin-bottom: 60px;
+	}
+}

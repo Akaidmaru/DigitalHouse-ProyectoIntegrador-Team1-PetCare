@@ -16,6 +16,7 @@ import AdminHome from "./pages/admin/AdminHome";
 import AdminService from "./pages/admin/AdminService";
 import ServiceDetail from "./pages/ServiceDetail";
 import ServiceGallery from "./pages/ServiceGallery";
+import { Categories } from "./pages/Categories";
 
 /**
  * Main application component that handles routing
@@ -34,6 +35,7 @@ function App() {
 
 					{/* Rutas del usuario (sitio web) */}
 					<Route path="/" element={<Home />} />
+					<Route path="/categories/:id" element={<Categories/>}/>
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceGallery />} />
 

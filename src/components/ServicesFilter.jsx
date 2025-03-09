@@ -45,7 +45,7 @@ export const ServicesFilter = () => {
                 ) : (
                     <ServicesFilterContainer>
                         {categories.map((category, index) => (
-                            <FilterCategory key={index} name={category.name} icon={category.icon} />
+                            <FilterCategory key={index} name={category.name} icon={category.icon} id={index} />
                         ))}
                     </ServicesFilterContainer>
                 )}

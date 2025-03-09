@@ -34,7 +34,7 @@ const IconRight = styled(FaChevronDown)`
   color: #2d2d2d;
 `;
 
-// Lista de opciones
+// Lista de opciones - Usamos $isVisible como prop transiente
 const OptionsContainer = styled.div`
   position: absolute;
   top: 100%;
@@ -43,7 +43,7 @@ const OptionsContainer = styled.div`
   background: white;
   border-radius: 10px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  display: ${(props) => (props.show ? "block" : "none")};
+  display: ${(props) => (props.$isVisible ? "block" : "none")};
   z-index: 10;
 `;
 
@@ -73,7 +73,7 @@ const SelectService = () => {
       <IconLeft />
       {selectedOption}
       <IconRight />
-      <OptionsContainer show={showOptions}>
+      <OptionsContainer $isVisible={showOptions}>
         {options.map((option, index) => (
           <Option key={index} onClick={() => handleSelect(option)}>
             {option}
@@ -81,7 +81,7 @@ const SelectService = () => {
         ))}
       </OptionsContainer>
     </SelectContainer>
-      );
-    };
-    
-    export default SelectService;
+  );
+};
+
+export default SelectService;

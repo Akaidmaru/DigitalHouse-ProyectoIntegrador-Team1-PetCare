@@ -4,59 +4,70 @@ import PropTypes from "prop-types";
 import "../../styles/services/serviceDetailImagesGrid.css";
 import arrowLeft from "../../images/arrow-left.png";
 
-const ServiceDetailImagesGrid = ({ images }) => {
-  const navigate = useNavigate();
+const ServiceDetailImagesGrid = ({ images, onGoBack }) => {
+	const navigate = useNavigate();
 
-  const handleViewMore = () => {
-    navigate("/gallery", { state: { images } });
-    window.scrollTo(0, 0); // Add scroll to top
-  };
+	const handleViewMore = () => {
+		navigate("/gallery", { state: { images } });
+		window.scrollTo(0, 0); // Add scroll to top
+	};
 
-  return (
-    <div>
-      <div style={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        padding: '10px 20px'
-      }}>
-        <img 
-          src={arrowLeft} 
-          alt="Volver al inicio" 
-          style={{
-            width: '30px',
-            height: '30px',
-            cursor: 'pointer'
-          }}
-          onClick={() => navigate('/')}
-        />
-      </div>
-      <div className="images-grid-container">
-        {/* Main image */}
-        <div className="main-image">
-          <img src={images[0]} alt="Main service view" />
-        </div>
+	const handleBackClick = () => {
+		if (onGoBack) {
+			onGoBack();
+		} else {
+			navigate("/");
+		}
+	};
 
-        {/* Grid of 4 smaller images */}
-        <div className="secondary-images">
-          {images.slice(1, 5).map((image, index) => (
-            <div key={index} className="grid-image">
-              <img src={image} alt={`Service view ${index + 2}`} />
-            </div>
-          ))}
-        </div>
-      </div>
+	return (
+		<div>
+			<div
+				style={{
+					display: "flex",
+					justifyContent: "flex-end",
+					padding: "10px 20px",
+				}}
+			>
+				<img
+					src={arrowLeft}
+					alt="Volver"
+					style={{
+						width: "30px",
+						height: "30px",
+						cursor: "pointer",
+					}}
+					onClick={handleBackClick}
+				/>
+			</div>
+			<div className="images-grid-container">
+				{/* Main image */}
+				<div className="main-image">
+					<img src={images[0]} alt="Main service view" />
+				</div>
 
-      <div className="button-container">
-        <button className="view-more-button" onClick={handleViewMore}>
-          Ver más
-        </button>
-      </div>
-    </div>
-  );
+				{/* Grid of 4 smaller images */}
+				<div className="secondary-images">
+					{images.slice(1, 5).map((image, index) => (
+						<div key={index} className="grid-image">
+							<img src={image} alt={`Service view ${index + 2}`} />
+						</div>
+					))}
+				</div>
+			</div>
+
+			<div className="button-container">
+				<button className="view-more-button" onClick={handleViewMore}>
+					Ver más
+				</button>
+			</div>
+		</div>
+	);
 };
 
 ServiceDetailImagesGrid.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+	images: PropTypes.arrayOf(PropTypes.string).isRequired,
+	onGoBack: PropTypes.func,
 };
 
 export default ServiceDetailImagesGrid;

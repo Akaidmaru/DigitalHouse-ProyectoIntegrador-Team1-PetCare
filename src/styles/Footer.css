@@ -1,22 +1,24 @@
 .footer {
   width: 100%;
-  background-color: #fae7c4;
+  background-color: var(--footer-background-color);
+}
+
+.footer-content {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
 .footer-main {
-  max-width: 1200px;
   width: 100%;
-  margin: 0 auto;
-  padding: 0 1rem;
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row;
   justify-content: space-between;
-  background-color: transparent;
-  border-radius: 8px;
-  margin-bottom: 1rem;
+  gap: 20px;
+  padding: 20px;
 }
 
 .footer-logo-container {
@@ -71,7 +73,7 @@
 .footer-copyright {
   width: 100%;
   background-color: #314549;
-  padding: 12px 2rem;
+  padding: 12px 0;
 }
 
 .footer-copyright p {
@@ -90,17 +92,22 @@
 .copyright-text {
   display: flex;
   align-items: center;
-  justify-content: center;
+  color: #ffffff;
   font-family: "Inter", sans-serif;
+  text-align: center;
+  white-space: nowrap; /* Evita que el texto se rompa */
 }
 
 /* Nuevo estilo para los íconos sociales */
 .social-icons {
-  position: absolute;
-  right: 0;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   align-items: center;
+}
+
+/* Eliminamos el position: absolute de los iconos sociales */
+.footer-copyright .social-icons {
+  position: static;
 }
 
 h4 {
@@ -139,60 +146,81 @@ h4 {
 
 /* Estilos responsivos */
 @media (max-width: 768px) {
-  .footer-main {
+  .footer {
+    width: 100%;
+  }
+
+  .footer-content {
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.75rem;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .footer-main {
+    justify-content: center;
+    padding: 10px;
   }
 
   .footer-logo-container {
-    width: 100%;
-    justify-content: center;
-    padding: 1rem 0 0 0;
+    width: auto;
+    padding: 0;
+    margin-left: 3rem;
   }
 
-  .footer-info {
-    width: 100%;
-    align-items: center;
-    gap: 1rem;
+  .footer-logo {
+    width: 150px;
+    height: auto;
   }
 
   .mobile-info {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-right: 3rem;
+    margin-top: 1.5rem;
+  }
+
+  .mobile-section {
+    display: flex;
     align-items: center;
     gap: 0.75rem;
   }
 
-  .info-item {
-    font-size: 12px;
-    gap: 0.75rem;
+  .mobile-icons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .mobile-info h4 {
+    color: #314549;
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
   }
 
   .info-icon {
     font-size: 18px;
-  }
-
-  /* Estilo específico para el ícono del email */
-  .email-icon {
-    background-color: #fae7c4;
-    border-radius: 2px;
-  }
-
-  /* Estilo específico para el ícono del email */
-  .mobile-info .info-item:last-child .info-icon {
     color: #314549;
-    /* Volvemos al color original para el borde */
-    fill: #fae7c4;
-    /* Color del fondo para el interior */
-    stroke: #314549;
-    /* Color negro para el borde */
-    stroke-width: 1px;
-    /* Grosor del borde */
+    cursor: pointer;
   }
 
-  /* Ocultamos los elementos con clase desktop-only */
+  .copyright-wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 10px 20px;
+  }
+
+  .copyright-text {
+    font-size: 14px;
+  }
+
+  .social-icons {
+    gap: 15px;
+  }
+
   .desktop-only {
     display: none;
   }
@@ -200,36 +228,43 @@ h4 {
   .mobile-only {
     display: block;
   }
-
-  .footer-copyright p {
-    font-size: 0.7rem;
-  }
 }
 
-/* Ajustes adicionales para pantallas muy pequeñas */
-@media (max-width: 320px) {
-  .footer-logo {
-    width: 150px;
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .footer {
+    margin-top: 1.5rem;
   }
 
-  .footer-main {
-    padding: 0.5rem;
-    gap: 0.5rem;
-    margin-bottom: 0.5rem;
+  .footer-copyright {
+    padding: 12px 1rem;
   }
 
-  .footer-copyright p {
-    font-size: 0.6rem;
+  .copyright-wrapper {
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .copyright-text {
+    font-size: 12px;
+  }
+
+  .social-icons {
+    gap: 15px;
+  }
+
+  .footer-logo-container {
+    margin-left: 1.5rem;
   }
 }
 
 .copyright-wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 50px;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
-  color: #ffffff;
-  font-size: 0.8rem;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan si es necesario */
 }

@@ -1,7 +1,7 @@
 // React
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { CiLogout, CiUser } from "react-icons/ci";
+import { CiDesktop, CiLogout, CiUser } from "react-icons/ci";
 
 // Components
 import { AuthContext } from "../../auth/AuthContext";
@@ -92,6 +92,13 @@ const Header = () => {
 													<Link to="/perfil" className="dropdown-item">
 														<CiUser /> Ver perfil
 													</Link>
+													{auth.role === "ADMIN" && (
+														<Link to="/administracion" className="dropdown-item">
+														<CiDesktop /> Panel administración
+														</Link>
+													)}
+													
+													
 													<button onClick={logout} className="dropdown-item">
 														<CiLogout /> Cerrar Sesión
 													</button>
