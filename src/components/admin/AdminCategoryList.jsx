@@ -6,6 +6,9 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LiaPawSolid } from "react-icons/lia";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = `${BASE_URL}/api/categorias`;
+
 const AdminCategoryList = ({ onEdit }) => {
 	const [categories, setCategories] = useState([]);
 	const [error, setError] = useState(null);
@@ -21,7 +24,7 @@ const AdminCategoryList = ({ onEdit }) => {
 		}
 
 		try {
-			const response = await axios.get("http://localhost:8080/api/categorias", {
+			const response = await axios.get(API_URL, {
 				headers: {
 					Authorization: `Bearer ${auth.token}`,
 				},
@@ -67,7 +70,7 @@ const AdminCategoryList = ({ onEdit }) => {
 		try {
 			console.log("Deleting category:", categoryToDelete); // Debug log
 			const response = await axios.delete(
-				`http://localhost:8080/api/categorias/${categoryToDelete.idCategoria}`, // Changed from .id to .idCategoria
+				`${API_URL}/${categoryToDelete.idCategoria}`, // Changed from .id to .idCategoria
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,

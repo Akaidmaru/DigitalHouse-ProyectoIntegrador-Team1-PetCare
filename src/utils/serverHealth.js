@@ -1,12 +1,23 @@
 export const checkServerHealth = async () => {
+    const BASE_URL = import.meta.env.VITE_API_URL || "";
+
+    // Usar concatenación segura con new URL()
+    const healthURL = new URL('/actuator/health', BASE_URL).toString();
+
     try {
-        const response = await fetch('http://localhost:8080/actuator/health', {
+        // Implementar timeout con AbortController
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+        const response = await fetch(healthURL, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json'
             },
-            timeout: 5000
+            signal: controller.signal // Usar signal en lugar de timeout
         });
+
+        clearTimeout(timeoutId);
 
         if (!response.ok) {
             throw new Error('Server health check failed');

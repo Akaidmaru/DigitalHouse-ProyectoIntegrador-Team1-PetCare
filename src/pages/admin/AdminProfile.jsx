@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../auth/AuthContext";
 import axios from "axios";
 
 export const AdminProfile = () => {
-    const API_URL = `${import.meta.env.VITE_API_URL}/api/usuarios`;
+    const BASE_URL = import.meta.env.VITE_API_URL || "";
+    const API_URL = `${BASE_URL}/api/usuarios`;
     const [profileInfo, setProfileInfo] = useState(null);
     const [error, setError] = useState(null);
-
-    // Suponiendo que auth proviene de un contexto o almacenamiento local
     const { auth } = useContext(AuthContext);
 
-    console.log("AUTH",auth)
+    console.log("AUTH", auth)
     const getAuthHeaders = () => {
         if (!auth || !auth.token) return null;
         return {
             headers: {
                 Authorization: `Bearer ${auth.token}`,
+                "Content-Type": "application/json"
             },
         };
     };
@@ -30,17 +30,19 @@ export const AdminProfile = () => {
 
         try {
             const response = await axios.get(`${API_URL}/profile`, headers);
-            setProfileInfo(response.data); // Actualizar el estado con los datos del usuario
+            setProfileInfo(response.data);
         } catch (error) {
             console.error("Error al obtener el usuario:", error);
-            setError("Error al obtener el usuario: " + error.message);
+            const errorMessage = error.response?.status === 403
+                ? "No tienes permisos para ver este perfil"
+                : `Error al obtener el usuario: ${error.response?.data?.message || error.message}`;
+            setError(errorMessage);
         }
     };
 
-    // Llamar la función cuando el componente se monte
     useEffect(() => {
-        getUserProfile(); // Cambia 3 por el ID dinámico si es necesario
-    }, []);
+        getUserProfile();
+    }, [auth]);
 
     return (
         <div>

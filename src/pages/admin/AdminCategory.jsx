@@ -21,6 +21,9 @@ const AdminCategory = ({ isInAdminLayout }) => {
 	const [error, setError] = useState(null);
 	const { auth, logout } = useContext(AuthContext);
 
+	const BASE_URL = import.meta.env.VITE_API_URL || "";
+	const API_URL = `${BASE_URL}/api/categorias`;
+
 	const getAuthHeaders = () => {
 		if (!auth || !auth.token) return null;
 		return {
@@ -39,7 +42,7 @@ const AdminCategory = ({ isInAdminLayout }) => {
 
 		try {
 			await axios.post(
-				"http://localhost:8080/api/categorias",
+				API_URL,
 				categoryData,
 				headers
 			);
@@ -67,7 +70,7 @@ const AdminCategory = ({ isInAdminLayout }) => {
 
 		try {
 			await axios.put(
-				`http://localhost:8080/api/categorias/${categoryData.idCategoria}`,
+				`${API_URL}/${categoryData.idCategoria}`,
 				{ nombre: categoryData.nombre },
 				headers
 			);
@@ -75,12 +78,11 @@ const AdminCategory = ({ isInAdminLayout }) => {
 			setShowEditForm(false);
 			setSelectedCategory(null);
 
-			// Recargar la lista usando el componente AdminCategoryList
-			const categoryListComponent = document.querySelector("AdminCategoryList");
-			if (categoryListComponent?.props?.onRefresh) {
-				categoryListComponent.props.onRefresh();
+			// Recargar la lista usando la función global de actualización
+			if (window.refreshCategoryList) {
+				window.refreshCategoryList();
 			} else {
-				// Si no podemos acceder al componente directamente, forzar una recarga
+				// Si la función no está disponible, recargar la página
 				window.location.reload();
 			}
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "../../styles/login/login.css";
@@ -6,11 +6,16 @@ import Logo from "../header/Logo";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Login = ({ isLoginValue }) => {
   const [isLogin, setIsLogin] = useState(isLoginValue);
-  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const BASE_URL = import.meta.env.VITE_API_URL || "";
+  const API_URL_LOGIN = `${BASE_URL}/api/auth/login`;
+  const API_URL_REGISTER = `${BASE_URL}/api/auth/register`;
 
   // React Hook Form para manejar los inputs y validaciones
   const {
@@ -23,8 +28,8 @@ const Login = ({ isLoginValue }) => {
   const onSubmit = async (data) => {
     try {
       const url = isLogin
-        ? "http://localhost:8080/api/auth/login"
-        : "http://localhost:8080/api/auth/register";
+        ? API_URL_LOGIN
+        : API_URL_REGISTER;
       const response = await axios.post(url, data);
 
       // Guardar el token en el localStorage
@@ -65,21 +70,10 @@ const Login = ({ isLoginValue }) => {
         navigate("/");
       }
 
-
-
     } catch (error) {
-      console.error("Error en la autenticación:", error.response?.data || error);
-
-      toast.error(error.response?.data?.message || "Error en la autenticación", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      const message = error.response?.data?.message || "Error en la autenticación";
+      setErrorMessage(message);
+      toast.error(message);
     }
   };
 
@@ -91,6 +85,8 @@ const Login = ({ isLoginValue }) => {
           <Logo />
         </div>
         <h2>{isLogin ? "Iniciar Sesión" : "Crear Cuenta"}</h2>
+
+        {errorMessage && <div className="error-alert">{errorMessage}</div>}
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {!isLogin ? (
@@ -215,6 +211,10 @@ const Login = ({ isLoginValue }) => {
       </div>
     </>
   );
+};
+
+Login.propTypes = {
+  isLoginValue: PropTypes.bool.isRequired,
 };
 
 export default Login;

@@ -1,57 +1,78 @@
 import axios from "axios";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+
 const instance = axios.create({
-    baseURL: "http://localhost:8080",
-    headers: {
-        "Content-Type": "application/json",
-    },
+	baseURL: BASE_URL,
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
 
 // Add a request interceptor to include the token in every request
 instance.interceptors.request.use(
-    (config) => {
-        // Get the token from localStorage before each request
-        const token = localStorage.getItem('token');
+	(config) => {
+		// Solo mostrar logs en desarrollo
+		if (import.meta.env.DEV) {
+			console.log("Config:", {
+				config,
+			});
+		}
 
-        if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
-        } else {
-            console.warn('No token found in localStorage');
-        }
+		// Get the token from localStorage before each request
+		const token = localStorage.getItem("token");
+		// Solo mostrar logs en desarrollo
+		if (import.meta.env.DEV) {
+			console.log("Token:", {
+				token,
+			});
+		}
 
-        console.log("Request:", {
-            url: config.url,
-            headers: config.headers,
-        });
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`;
+		}
 
-        return config;
-    },
-    (error) => {
-        return Promise.reject(error);
-    }
+		// Solo mostrar logs en desarrollo
+		if (import.meta.env.DEV) {
+			console.log("Request:", {
+				url: config.url,
+				method: config.method,
+				// No mostrar headers para proteger datos sensibles
+			});
+		}
+
+		return config;
+	},
+	(error) => {
+		return Promise.reject(error);
+	}
 );
 
 instance.interceptors.response.use(
-    (response) => {
-        console.log("Response:", response.status, response.data);
-        return response;
-    },
-    (error) => {
-        // Handle 401 (Unauthorized) or 403 (Forbidden) errors
-        if (error.response?.status === 401 || error.response?.status === 403) {
-            console.error('Authentication error:', error.response.status);
-            localStorage.removeItem('token'); // Clear invalid token
-            window.location.href = '/'; // Redirect to home/login
-        }
+	(response) => {
+		// Solo mostrar logs en desarrollo
+		if (import.meta.env.DEV) {
+			console.log("Response:", response.status);
+		}
+		return response;
+	},
+	(error) => {
+		// Handle 401 (Unauthorized) or 403 (Forbidden) errors
+		if (error.response?.status === 401 || error.response?.status === 403) {
+			localStorage.removeItem("token");
+			window.location.href = "/";
+		}
 
-        console.error("Error:", {
-            status: error.response?.status,
-            data: error.response?.data,
-            message: error.message,
-        });
+		// Solo mostrar logs en desarrollo
+		if (import.meta.env.DEV) {
+			console.error("Error:", {
+				status: error.response?.status,
+				message: error.message,
+			});
+		}
 
-        return Promise.reject(error);
-    }
+		return Promise.reject(error);
+	}
 );
 
 export default instance;

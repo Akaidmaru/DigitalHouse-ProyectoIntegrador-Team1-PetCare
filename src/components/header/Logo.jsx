@@ -16,7 +16,7 @@ import "../../styles/header/logo.css";
 const Logo = () => {
 	return (
 		<Link to="/" className="logo">
-			<img src="/src/images/pet-care-logo-v2.png" alt="pet care logo" />
+			<img src="https://images-s3-test.s3.us-east-1.amazonaws.com/002bd4cd-4d9d-4507-b37a-8ac22622a83b_pet-care-logo-v2.png" />
 		</Link>
 	);
 };

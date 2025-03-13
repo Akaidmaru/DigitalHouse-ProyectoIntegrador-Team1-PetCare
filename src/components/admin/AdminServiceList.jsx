@@ -18,6 +18,9 @@ import trashIcon from "../../images/trash-can.png";
 // Import the LiaPawSolid icon component
 import { LiaPawSolid } from "react-icons/lia";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = `${BASE_URL}/api/servicios`;
+
 const AdminServiceList = ({ onEdit }) => {
 	const { auth } = useContext(AuthContext);
 	const [services, setServices] = useState([]);
@@ -43,7 +46,7 @@ const AdminServiceList = ({ onEdit }) => {
 
 		try {
 			const response = await axios.get(
-				"http://localhost:8080/api/servicios",
+				API_URL,
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,
@@ -83,7 +86,7 @@ const AdminServiceList = ({ onEdit }) => {
 		setDeleteLoading(true);
 		try {
 			const response = await axios.delete(
-				`http://localhost:8080/api/servicios/${serviceToDelete.idServicio}`,
+				`${API_URL}/${serviceToDelete.idServicio}`,
 				{
 					headers: {
 						Authorization: `Bearer ${auth.token}`,

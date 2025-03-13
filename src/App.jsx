@@ -1,30 +1,24 @@
 // React
 import { Routes, Route } from "react-router-dom";
-// Styles
-import "./styles/common/app.css";
-import "./styles/GlobalStyles.css";
+
+// Pages
+import Home from "./pages/Home";
+import AdminHome from "./pages/admin/AdminHome";
+import ServiceDetail from "./pages/services/ServiceDetail";
+import ServiceImagesGallery from "./pages/services/ServiceImagesGallery";
+import { Categories } from "./pages/Categories";
 
 // Components
 import ProtectedRoute from "./auth/ProtectedRoute";
 import { AuthProvider } from "./auth/AuthContext";
 import Layout from "./layouts/Layout";
 
-// Pages
-import Home from "./pages/Home";
-// import Admin from "./pages/Admin";
-import AdminHome from "./pages/admin/AdminHome";
-import AdminService from "./pages/admin/AdminService";
-import ServiceDetail from "./pages/ServiceDetail";
-import ServiceGallery from "./pages/ServiceGallery";
-import { Categories } from "./pages/Categories";
+// Styles
+import "./styles/common/app.css";
+import "./styles/GlobalStyles.css";
 
-/**
- * Main application component that handles routing
- * Uses React Router for navigation
- * Layout component serves as the parent route
- * Home component is the default landing page
- * Includes 404 error handling for invalid routes
- */
+// Images
+
 function App() {
 	return (
 		<AuthProvider>
@@ -35,9 +29,11 @@ function App() {
 
 					{/* Rutas del usuario (sitio web) */}
 					<Route path="/" element={<Home />} />
-					<Route path="/categories/:id" element={<Categories/>}/>
+					<Route path="/categories/:id" element={<Categories />} />
+					{/* Al darle click a la imagen del card en el home, me redirige al detalle del servicio */}
+					{/* y el botón "Ver más" me lleva a la galería de imágenes de ese servicio */}
 					<Route path="/service/:id" element={<ServiceDetail />} />
-					<Route path="/gallery" element={<ServiceGallery />} />
+					<Route path="/gallery" element={<ServiceImagesGallery />} />
 
 					{/* Rutas del administrador */}
 					<Route

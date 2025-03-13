@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8080/api/auth";
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = `${BASE_URL}/api/auth`;
 
 export const register = async (userData) => {
   try {
@@ -8,7 +9,7 @@ export const register = async (userData) => {
     return response.data;
   } catch (error) {
     console.error("Error en el registro:", error.response?.data || error.message);
-    // throw error;
+    throw error;
   }
 };
 
@@ -18,6 +19,6 @@ export const login = async (userData) => {
     return response.data;
   } catch (error) {
     console.error("Error en el login:", error.response?.data || error.message);
-    // throw error;
+    throw error;
   }
 };

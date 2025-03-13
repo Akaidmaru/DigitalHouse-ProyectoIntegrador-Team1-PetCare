@@ -6,22 +6,25 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LiaPawSolid } from "react-icons/lia";
 
+const BASE_URL = import.meta.env.VITE_API_URL || "";
+const API_URL = `${BASE_URL}/api/usuarios`;
+
 const AdminUserList = ({ onEdit }) => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const { auth, logout } = useContext(AuthContext);
     const [deleteLoading, setDeleteLoading] = useState(false);
     const [confirmDelete, setConfirmDelete] = useState(false);
-    const [categoryToDelete, setCategoryToDelete] = useState(null);
+    const [userToDelete, setUserToDelete] = useState(null);
 
-    const fetchCategories = async () => {
+    const fetchUsers = async () => {
         if (!auth || !auth.token) {
             logout();
             return;
         }
 
         try {
-            const response = await axios.get("http://localhost:8080/api/usuarios", {
+            const response = await axios.get(API_URL, {
                 headers: {
                     Authorization: `Bearer ${auth.token}`,
                 },
@@ -33,13 +36,13 @@ const AdminUserList = ({ onEdit }) => {
     };
 
     useEffect(() => {
-        fetchCategories();
+        fetchUsers();
     }, [auth.token]);
 
-    // Make fetchCategories available to parent
+    // Make fetchUsers available to parent
     useEffect(() => {
         if (window) {
-            window.refreshCategoryList = fetchCategories;
+            window.refreshCategoryList = fetchUsers;
         }
         return () => {
             if (window) {
@@ -48,23 +51,54 @@ const AdminUserList = ({ onEdit }) => {
         };
     }, []);
 
-    // Make fetchCategories available globally
+    // Make fetchUsers available globally
     useEffect(() => {
-        window.refreshCategoryList = fetchCategories;
+        window.refreshCategoryList = fetchUsers;
         return () => {
             delete window.refreshCategoryList;
         };
-    }, [fetchCategories]); // Add fetchCategories as dependency
+    }, [fetchUsers]); // Add fetchUsers as dependency
 
-    const openDeleteModal = (category) => {
-        setCategoryToDelete(category);
+    const openDeleteModal = (user) => {
+        setUserToDelete(user);
         setConfirmDelete(true);
     };
 
-
     const handleDeleteCancel = () => {
         setConfirmDelete(false);
-        setCategoryToDelete(null);
+        setUserToDelete(null);
+    };
+
+    const handleDeleteConfirmed = async () => {
+        if (!userToDelete) return;
+        setDeleteLoading(true);
+        try {
+            const response = await axios.delete(
+                `${API_URL}/${userToDelete.id}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${auth.token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            if (response.status === 204) {
+                toast.success("Usuario eliminado exitosamente");
+                setUsers(users.filter(u => u.id !== userToDelete.id));
+                setError(null);
+            }
+        } catch (err) {
+            const errorMessage = err.response?.status === 403
+                ? "No tienes permisos para eliminar este usuario"
+                : "Error al eliminar el usuario";
+            setError(errorMessage);
+            toast.error(errorMessage);
+        } finally {
+            setDeleteLoading(false);
+            setConfirmDelete(false);
+            setUserToDelete(null);
+        }
     };
 
     return (
@@ -91,16 +125,14 @@ const AdminUserList = ({ onEdit }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((category) => (
-                            <tr key={category.idCategoria} className="table-row">
-                                {" "}
-                                {/* Changed from .id to .idCategoria */}
-                                <td className="table-cell">{category.nombre}</td>
+                        {users.map((user) => (
+                            <tr key={user.id} className="table-row">
+                                <td className="table-cell">{user.nombre}</td>
                                 <td className="table-cell">
                                     <div className="action-buttons">
                                         <button
                                             className="icon-button"
-                                            onClick={() => onEdit(category)}
+                                            onClick={() => onEdit(user)}
                                             title="Editar"
                                         >
                                             <svg
@@ -117,7 +149,7 @@ const AdminUserList = ({ onEdit }) => {
                                         </button>
                                         <button
                                             className="icon-button delete"
-                                            onClick={() => openDeleteModal(category)}
+                                            onClick={() => openDeleteModal(user)}
                                             title="Eliminar"
                                             disabled={deleteLoading}
                                         >
@@ -146,8 +178,8 @@ const AdminUserList = ({ onEdit }) => {
                     <div className="modal-container">
                         <LiaPawSolid className="modal-icon" />
                         <p>
-                            ¿Estás seguro de querer eliminar la categoría &quot;
-                            {categoryToDelete?.nombre}&quot; del listado?
+                            ¿Estás seguro de querer eliminar al usuario &quot;
+                            {userToDelete?.nombre}&quot; del listado?
                         </p>
                         <div className="modal-buttons">
                             <button
