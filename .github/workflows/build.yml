@@ -1,34 +1,35 @@
 name: Build & Push Frontend
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+    push:
+        branches: [main]
+    workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Login to GHCR
-        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+            - name: Login to GHCR
+              run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
-      - name: Build and Push
-        run: |
-          docker build \
-          --build-arg VITE_API_URL=${{ env.VITE_API_URL }} \
-          -t ghcr.io/akaidmaru/digitalhouse-proyectointegrador-team1-petcare:latest .
-          docker push ghcr.io/akaidmaru/digitalhouse-proyectointegrador-team1-petcare:latest
+            - name: Build and Push
+              run: |
+                  docker build \
+                  --build-arg VITE_API_URL=${{ env.VITE_API_URL }} \
+                  -t ghcr.io/akaidmaru/digitalhouse-proyectointegrador-team1-petcare:latest .
+                  docker push ghcr.io/akaidmaru/digitalhouse-proyectointegrador-team1-petcare:latest
 
-      - name: Trigger Infra Deployment
-        uses: actions/github-script@v6
-        if: success()
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: 'akaidmaru',
-              repo: 'infraProyectoIntegrador',
-              workflow_id: 'build-deploy.yml',
-              ref: 'main',
-            });
+            - name: Trigger Infra Deployment
+              uses: actions/github-script@v6
+              if: success()
+              with:
+                  github-token: ${{ secrets.WORKFLOW_TOKEN }}
+                  script: |
+                      await github.rest.actions.createWorkflowDispatch({
+                        owner: 'akaidmaru',
+                        repo: 'infraProyectoIntegrador',
+                        workflow_id: 'build-deploy.yml',
+                        ref: 'main',
+                      });
