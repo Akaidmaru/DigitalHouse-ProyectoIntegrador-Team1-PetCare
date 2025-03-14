@@ -1,0 +1,34 @@
+# Ignore git 
+.git
+.gitignore
+.gitmodules
+
+# Ignore env
+*.env
+
+# Ignore node modules - they will be reinstalled in the container
+node_modules
+
+# Ignore build and dist
+/build
+/dist
+
+# Markdown files
+ServicioEndpoints.md
+README.md
+conventional-commits.md
+
+# Ignore logs
+*.log
+
+# Ignore docker files
+Dockerfile*
+.dockerignore
+
+# Misc
+*.tmp
+!package.json
+.DS_Store
+Thumbs.db
+/test/
+*.spec.js
