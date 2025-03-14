@@ -2,7 +2,7 @@ name: Build & Push Frontend
 
 on:
     push:
-        branches: [main]
+        branches: [testing]
     workflow_dispatch:
 
 jobs:
