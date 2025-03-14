@@ -7,10 +7,14 @@ const API_URL = `${BASE_URL}/api/servicios`;
 export const getServices = async () => {
 	try {
 		const response = await axiosInstance.get(API_URL);
+		console.log("Obtener todos los servicios");
+		console.log(response.data.listaServicios);
 		return response.data.listaServicios;
 	} catch (error) {
 		if (error.response) {
-			throw new Error(error.response.data.message || "Error del servidor");
+			throw new Error(
+				error.response.data.message || "Error del servidor"
+			);
 		} else if (error.request) {
 			throw new Error("No se pudo conectar con el servidor");
 		} else {
@@ -23,10 +27,14 @@ export const getServices = async () => {
 export const getServiceById = async (serviceId) => {
 	try {
 		const response = await axiosInstance.get(`${API_URL}/${serviceId}`);
+		console.log("Obtener un servicio por ID");
+		console.log(response.data);
 		return response.data;
 	} catch (error) {
 		if (error.response) {
-			throw new Error(error.response.data.message || "Error del servidor");
+			throw new Error(
+				error.response.data.message || "Error del servidor"
+			);
 		} else if (error.request) {
 			throw new Error("No se pudo conectar con el servidor");
 		} else {

@@ -1,3 +1,24 @@
+.back-button {
+	background: none;
+	border: none;
+	padding: 0.5rem;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.back-button:hover {
+	-webkit-transform: scale(1.1);
+	-moz-transform: scale(1.1);
+	-ms-transform: scale(1.1);
+	-o-transform: scale(1.1);
+	transform: scale(1.1);
+}
+
+.back-button img {
+	width: 42px;
+	height: 42px;
+}
+
 .images-grid-container {
 	display: flex;
 	width: 100%;

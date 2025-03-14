@@ -35,7 +35,9 @@ export const ServiceCard = ({
 					<p>{excerpt}</p>
 				</ExcerptContainer>
 				<CTAContainer>
-					<ButtonContainer>Agenda</ButtonContainer>
+					<ButtonContainer onClick={() => onImageClick()}>
+						Ver más
+					</ButtonContainer>
 				</CTAContainer>
 			</InfoContainer>
 		</CardContainer>

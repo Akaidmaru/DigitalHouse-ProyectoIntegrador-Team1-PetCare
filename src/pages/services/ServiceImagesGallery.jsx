@@ -1,6 +1,15 @@
+// React
 import { useLocation, useNavigate } from "react-router-dom";
-import "../styles/services/serviceGallery.css";
-import arrowLeft from "../images/arrow-left.png";
+
+// Pages
+
+// Components
+
+// Styles
+import "../../styles/services/serviceImagesGallery.css";
+
+// Images
+import arrowLeft from "../../images/arrow-left.png";
 
 const ServiceGallery = () => {
 	const location = useLocation();
