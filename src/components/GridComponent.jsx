@@ -28,26 +28,57 @@ export const GridComponent = ({ onServiceClick, type, services }) => {
 	useEffect(() => {
 		if (type && type === "category") {
 			console.log("CATEGORIA", services);
+			return;
 		}
 
 		const fetchServices = async () => {
 			try {
 				setLoading(true);
-				const data = await getServices();
-				console.log("DATA: ", data);
 
-				// Mezclar los servicios en un orden aleatorio
-				const randomizedServices = shuffleArray(data);
-				setProfiles(randomizedServices);
+				// Check if we have stored services in localStorage
+				const storedServices = localStorage.getItem("featuredServices");
+
+				if (storedServices) {
+					// Use stored services if they exist
+					setProfiles(JSON.parse(storedServices));
+					setLoading(false);
+				} else {
+					// Otherwise fetch and shuffle
+					const data = await getServices();
+					console.log("DATA: ", data);
+
+					// Mezclar los servicios en un orden aleatorio
+					const randomizedServices = shuffleArray(data);
+					setProfiles(randomizedServices);
+
+					// Store the randomized services in localStorage
+					localStorage.setItem(
+						"featuredServices",
+						JSON.stringify(randomizedServices)
+					);
+					setLoading(false);
+				}
 			} catch (error) {
 				console.error("Error loading profiles:", error);
 				setProfiles([]); // En caso de error, establecer un array vacío
-			} finally {
 				setLoading(false);
 			}
 		};
 
 		fetchServices();
+
+		// Add an event listener for page refresh/load
+		const handlePageRefresh = () => {
+			// Clear the stored services when the page is refreshed
+			localStorage.removeItem("featuredServices");
+		};
+
+		window.addEventListener("beforeunload", handlePageRefresh);
+
+		// Clean up the event listener
+		return () => {
+			window.removeEventListener("beforeunload", handlePageRefresh);
+		};
 	}, []);
 
 	// Pagination calculations
