@@ -2,7 +2,7 @@ name: Build & Push Frontend
 
 on:
     push:
-        branches: [development]
+        branches: [aws-cloud-front]
     workflow_dispatch:
 
 jobs:
