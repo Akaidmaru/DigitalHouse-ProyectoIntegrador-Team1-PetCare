@@ -1,8 +1,16 @@
 .reservation-history-container {
-  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 80px auto;
-  padding: 24px;
   text-align: center;
+}
+
+.reservation-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;  
 }
 
 .reservation-history-title {
@@ -14,13 +22,16 @@
 
 .reservation-card {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content:center;
   margin-bottom: 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  padding: 1rem;  
+  max-width: 800px;
 }
 
 .reservation-card:hover {
@@ -43,8 +54,9 @@
 .reservation-dates {
   display: flex;
   justify-content: space-between;
-  margin: 0px 20px 16px 20px;
   color: #555;
+  gap: 2rem;
+  width: 100%;
 }
 
 .date-label {
@@ -94,6 +106,19 @@
 }
 
 /* Media queries para dispositivos móviles */
+@media screen and (max-width: 650px) {
+  .reservation-dates{
+    max-width: 300px;    
+  }
+  .reservation-card{
+    max-width: 400px;
+  }
+  .date-label img{
+    max-height: 25px;
+  }
+}
+
+
 @media screen and (max-width: 768px) {
   .reservation-history-title {
     font-size: 2rem;
@@ -125,9 +150,5 @@
 
   .reservation-content {
     padding: 15px;
-  }
-
-  .reservation-dates {
-    margin: 0px 10px 16px 10px;
   }
 }

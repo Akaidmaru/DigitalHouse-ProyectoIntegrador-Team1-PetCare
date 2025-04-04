@@ -39,9 +39,9 @@ function App() {
 					<Route path="/service/:id" element={<ServiceDetail />} />
 					<Route path="/gallery" element={<ServiceImagesGallery />} />
 					<Route path="/mi-perfil" element={<UserProfile />} />
-          <Route path="/mis-favoritos" element={<Favorites />} />
-					<Route path="/mis-reservas" element={<ReservationHistory/>} />
-					<Route path="/mi-reserva/:id" element={<Reservation />}/>
+					<Route path="/mis-favoritos" element={<Favorites />} />
+					<Route path="/mis-reservas" element={<ReservationHistory />} />
+					<Route path="/mi-reserva/:id" element={<Reservation />} />
 					{/* Rutas del administrador */}
 					<Route
 						path="/administracion"

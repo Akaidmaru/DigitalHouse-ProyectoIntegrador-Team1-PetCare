@@ -1,19 +1,47 @@
-.tipoContainer{
+.tipoContainer {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
-.iconsContainer{
+.tipoContainer h3 {
+    word-wrap: break-word;
+    max-width: 70%;
+}
+
+.iconsContainer {
     display: flex;
     justify-content: space-between;
-    gap: 3px;   
+    gap: .7rem;
 }
 
-.shareIcon{
+.shareIcon {
     cursor: pointer;
+    margin-top: 4px;
 }
 
-.shareIcon:hover{
+.shareIcon:hover {
     transform: scale(1.2);
     color: #f5a623;
+}
+
+.nameContainer {
+    margin-top: .5rem;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.infoContainer {
+    display: flex;
+    align-items: normal;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.iFibRp {
+    gap: 0;
+}
+
+.iFibRp p {
+    margin-right: .5rem;
 }

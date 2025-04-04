@@ -7,6 +7,7 @@ export const ServicesFilterContainer = styled.div`
   margin: 0 auto;
   margin-bottom: 30px;
   padding: 10px 0px;
+  width: 100%;
 
   @media (max-width: 1200px) {
     flex-flow: wrap;
@@ -23,6 +24,7 @@ export const SelectContainer = styled.div`
     font-weight: bold;
     color: #333;
     margin-bottom: 5px;
+    white-space: nowrap;
   }
 
   div {
@@ -67,6 +69,7 @@ export const SelectGroupContainer = styled.div`
   align-items: center;
   width: 100%;
   margin-top: 15px;
+  max-width: inherit;
 
   & div.firstSelect {
     width: 27%;
@@ -75,8 +78,10 @@ export const SelectGroupContainer = styled.div`
   @media (max-width: 767px) {
     flex-direction: row;
     justify-content: space-between;
-    gap: 40px;
-    padding: 0 10px;
+    gap: 10px;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
 
     & div.firstSelect {
       width: 48%;

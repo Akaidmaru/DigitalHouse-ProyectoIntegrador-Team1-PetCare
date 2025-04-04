@@ -53,7 +53,7 @@ export const ServiceCard = ({
             </div>
 
 
-            <NameContainer>
+            <NameContainer className="nameContainer">
               <p>{name}</p>
               <StarsComponent rating={rating} key={name} />
             </NameContainer>

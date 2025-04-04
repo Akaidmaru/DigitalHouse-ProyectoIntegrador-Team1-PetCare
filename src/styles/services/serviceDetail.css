@@ -1,0 +1,17 @@
+.back-button-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
+.back-button-container img {
+  width: 30px;
+  height: 30px;
+}
+
+@media screen and (max-width: 768px) {
+  .back-button-container {
+    display: none;
+  }
+}

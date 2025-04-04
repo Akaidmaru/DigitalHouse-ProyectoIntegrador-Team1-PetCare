@@ -32,18 +32,18 @@ export const ServicesFilter = () => {
 
   const locations = isMobile
     ? [
-        { value: "medellin", label: "Medellín" },
-        { value: "bogota", label: "Bogotá" },
-        { value: "cali", label: "Cali" },
-      ]
+      { value: "medellin", label: "Medellín" },
+      { value: "bogota", label: "Bogotá" },
+      { value: "cali", label: "Cali" },
+    ]
     : [
-        { value: "medellin", label: "Medellín, Antioquia, Colombia" },
-        { value: "bogota", label: "Bogotá, Colombia" },
-        { value: "cali", label: "Cali, Colombia" },
-      ];
+      { value: "medellin", label: "Medellín, Antioquia, Colombia" },
+      { value: "bogota", label: "Bogotá, Colombia" },
+      { value: "cali", label: "Cali, Colombia" },
+    ];
 
   return (
-    <div>
+    <div style={{ width: "100%" }}>
       <div>
         <p
           style={{

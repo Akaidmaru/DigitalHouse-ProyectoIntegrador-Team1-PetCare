@@ -27,8 +27,8 @@ export const Image = styled.img`
 export const InfoContainer = styled.div`
     width: 50%;
     padding: 10px 10px;
-    & h4.serviceType {
-        color: #685044;
+    & h3.serviceType {
+        color: #314549;
         font-size: 16px; 
         font-weight: 700;
     }
@@ -70,14 +70,14 @@ export const ExcerptContainer = styled.div`
     }
   `;
 
-  export const CTAContainer = styled.div`
+export const CTAContainer = styled.div`
     display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px
   `;
 
-  export const ButtonContainer = styled.button`
+export const ButtonContainer = styled.button`
     background-color: #314549;
     padding: 10px;
     border-radius: 16px;

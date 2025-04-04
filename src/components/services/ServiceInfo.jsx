@@ -161,10 +161,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 	const fetchReservedDates = async () => {
 		try {
 			const token = localStorage.getItem("token");
-			console.log(
-				"Token for reserved dates:",
-				token ? "Present" : "Not found"
-			);
+			console.log("Token for reserved dates:", token ? "Present" : "Not found");
 
 			if (!token) {
 				console.log("No token found for reserved dates");
@@ -271,15 +268,13 @@ const ServiceInfo = ({ serviceInfo }) => {
 				<p>
 					Desde el{" "}
 					<span>
-						{start.dayName} {start.date} de {start.monthName} del{" "}
-						{start.year}
+						{start.dayName} {start.date} de {start.monthName} del {start.year}
 					</span>
 				</p>
 				<p>
 					al{" "}
 					<span>
-						{end.dayName} {end.date} de {end.monthName} del{" "}
-						{end.year}
+						{end.dayName} {end.date} de {end.monthName} del {end.year}
 					</span>
 				</p>
 			</div>
@@ -406,8 +401,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 					<div className="detailInfoContainer">
 						<h1 className="name">{name}</h1>
 						<p className="details">
-							{caracteristicas[1]?.valor} |{" "}
-							{caracteristicas[3]?.valor} de experiencia
+							{caracteristicas[1]?.valor} | {caracteristicas[3]?.valor} de experiencia
 						</p>
 						<p className="description">"{description}"</p>
 					</div>
@@ -426,8 +420,7 @@ const ServiceInfo = ({ serviceInfo }) => {
 											height={40}
 										/>
 										<p>
-											{caracteristica.nombre}:{" "}
-											{caracteristica.valor}
+											{caracteristica.nombre}: {caracteristica.valor}
 										</p>
 									</>
 								)}

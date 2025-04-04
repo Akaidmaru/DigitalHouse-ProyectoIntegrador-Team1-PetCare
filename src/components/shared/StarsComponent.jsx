@@ -10,7 +10,7 @@ export const StarsComponent = ({ rating }) => {
             <img key={`filled-${index}`} src={Star} alt="Star" height={30} />
           ))
         : Array.from({ length: 5 }, (_, index) => (
-          <img key={`empty-${index}`} src={StarEmpty} alt="Star Empty" height={12} />
+          <img style={{ margin: '5px 3px 7px 0px' }} key={`empty-${index}`} src={StarEmpty} alt="Star Empty" height={13} />
         ))}
     </div>
   );
